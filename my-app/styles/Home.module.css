@@ -19,22 +19,36 @@
   width: 70%;
   height: 50%;
   margin-left: 20%;
+  animation: up-down 1.8s ease-in-out infinite alternate-reverse both;
+}
+
+@keyframes up-down {
+  0% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
 }
 
 .title {
   font-size: 2rem;
   margin: 2rem 0;
+  text-decoration: underline;
+  color: rgb(225, 77, 77);
 }
 
 .description {
   line-height: 1;
   margin: 2rem 0;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  font-weight: 1000;
+  color: black;
 }
 
 .button {
   border-radius: 4px;
-  background-color: blue;
+  background-color: rgb(225, 77, 77);
   border: none;
   color: #ffffff;
   font-size: 15px;
@@ -46,22 +60,26 @@
 
 .button2 {
   border-radius: 4px;
-  background-color: indigo;
+  background-color: rgb(225, 77, 77);
   border: none;
   color: #ffffff;
-  font-size: 15px;
-  width: 200px;
+  font-size: 10px;
   padding: 10px;
   cursor: pointer;
-  margin-right: 2%;
+  margin-left: 0.2rem;
+   margin-bottom: 0.5rem;
 }
 
 .proposalCard {
   width: fit-content;
+  padding: 0.5rem;
   margin-top: 0.25rem;
   border: black 2px solid;
+  /* display: flex; */
   flex: 1;
   flex-direction: column;
+  border: none;
+  border-bottom: 2px solid black;
 }
 
 .container {
