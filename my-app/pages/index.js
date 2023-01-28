@@ -85,7 +85,7 @@ export default function Home() {
       const proposal = await daoContract.proposals(id);
       const parsedProposal = {
         proposalId: id,
-        nftTokenId: proposal.nftTokenId.toString(),
+        message: proposal.message.toString(),
         deadline: new Date(parseInt(proposal.deadline.toString()) * 1000),
         yayVotes: proposal.yayvotes.toString(),
         nayVotes: proposal.nayvotes.toString(),
@@ -225,8 +225,8 @@ export default function Home() {
         <div className={styles.container}>
           <label>Proposal you want to pass: </label>
           <input
-            placeholder="0"
-            type="number"
+            placeholder=""
+            type="string"
             onChange={(e) => setProposalLabel(e.target.value)}
           />
           <button className={styles.button2} onClick={createProposal}>
@@ -254,7 +254,7 @@ export default function Home() {
           {proposals.map((p, index) => (
             <div key={index} className={styles.proposalCard}>
               <p>Proposal ID: {p.proposalId}</p>
-              <p>Proposal Label : {p.nftTokenId}</p>
+              <p>Proposal Label : {p.message}</p>
               <p>Deadline: {p.deadline.toLocaleString()}</p>
               <p>Yay Votes: {p.yayVotes}</p>
               <p>Nay Votes: {p.nayVotes}</p>
