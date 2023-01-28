@@ -2,14 +2,6 @@
 pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-interface IFakeNFTMarketplace {
-    function purchase(uint256 _tokenId) external payable;
-
-    function getPrice() external view returns (uint256);
-
-    function available(uint256 _tokenId) external view returns (bool);
-}
-
 interface ICryptoDevsNFT {
     function balanceOf(address owner) external view returns (uint256);
 
@@ -19,14 +11,14 @@ interface ICryptoDevsNFT {
     ) external view returns (uint256);
 }
 
-contract CryptoDevsDao is Ownable {
+contract ChekDAO is Ownable {
     enum Vote {
         YAY,
         NAY
     }
 
     struct Proposal {
-        uint256 nftTokenId;
+        string message;
         uint256 deadline;
         uint256 yayvotes;
         uint256 nayvotes;
@@ -37,11 +29,9 @@ contract CryptoDevsDao is Ownable {
     mapping(uint256 => Proposal) public proposals;
     uint256 public numProposals;
 
-    IFakeNFTMarketplace nftMarketplace;
     ICryptoDevsNFT cryptoDevsNFT;
 
-    constructor(address _nftMarketplace, address _cryptoDevsNFT) payable {
-        nftMarketplace = IFakeNFTMarketplace(_nftMarketplace);
+    constructor(address _cryptoDevsNFT) payable {
         cryptoDevsNFT = ICryptoDevsNFT(_cryptoDevsNFT);
     }
 
@@ -68,12 +58,10 @@ contract CryptoDevsDao is Ownable {
     }
 
     function createProposal(
-        uint256 _nftTokenId
+        string memory _message
     ) external nftHolderOnly returns (uint256) {
-        require(nftMarketplace.available(_nftTokenId), "Nft not for sale");
-
         Proposal storage proposal = proposals[numProposals];
-        proposal.nftTokenId = _nftTokenId;
+        proposal.message = _message;
         proposal.deadline = block.timestamp + 5 minutes;
 
         numProposals++;
@@ -113,9 +101,7 @@ contract CryptoDevsDao is Ownable {
         Proposal storage proposal = proposals[proposalId];
 
         if (proposal.yayvotes > proposal.nayvotes) {
-            uint256 nftPrice = nftMarketplace.getPrice();
-            require(address(this).balance >= nftPrice, "Not enough funds");
-            nftMarketplace.purchase{value: nftPrice}(proposal.nftTokenId);
+            //this is the part where we can execute anything
         }
 
         proposal.executed = true;

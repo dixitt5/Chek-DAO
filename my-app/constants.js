@@ -1,16 +1,11 @@
-export const CRYPTODEVS_DAO_CONTRACT_ADDRESS =
-  "0x8F38705E133456cdfA51fD5b810D0f7F57f4D23a";
-export const CRYPTODEVS_NFT_CONTRACT_ADDRESS =
+export const CHEK_DAO_CONTRACT_ADDRESS =
+  "0xA246106a798Af1660e3803941a96a5Bd5E39ab98";
+export const CHEK_NFT_CONTRACT_ADDRESS =
   "0xDe7954d42Dc3266d4292Cc435c1486E3663A02AB";
 
-export const CRYPTODEVS_DAO_ABI = [
+export const CHEK_DAO_ABI = [
   {
     inputs: [
-      {
-        internalType: "address",
-        name: "_nftMarketplace",
-        type: "address",
-      },
       {
         internalType: "address",
         name: "_cryptoDevsNFT",
@@ -46,9 +41,9 @@ export const CRYPTODEVS_DAO_ABI = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "_nftTokenId",
-        type: "uint256",
+        internalType: "string",
+        name: "_message",
+        type: "string",
       },
     ],
     name: "createProposal",
@@ -112,9 +107,9 @@ export const CRYPTODEVS_DAO_ABI = [
     name: "proposals",
     outputs: [
       {
-        internalType: "uint256",
-        name: "nftTokenId",
-        type: "uint256",
+        internalType: "string",
+        name: "message",
+        type: "string",
       },
       {
         internalType: "uint256",
@@ -168,7 +163,7 @@ export const CRYPTODEVS_DAO_ABI = [
         type: "uint256",
       },
       {
-        internalType: "enum CryptoDevsDao.Vote",
+        internalType: "enum ChekDAO.Vote",
         name: "vote",
         type: "uint8",
       },
@@ -190,7 +185,7 @@ export const CRYPTODEVS_DAO_ABI = [
     type: "receive",
   },
 ];
-export const CRYPTODEVS_NFT_ABI = [
+export const CHEK_NFT_ABI = [
   {
     inputs: [
       {

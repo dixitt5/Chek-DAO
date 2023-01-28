@@ -5,10 +5,10 @@ import { Contract, providers } from "ethers";
 import { useEffect, useRef, useState } from "react";
 import Web3Modal from "web3modal";
 import {
-  CRYPTODEVS_DAO_CONTRACT_ADDRESS,
-  CRYPTODEVS_NFT_CONTRACT_ADDRESS,
-  CRYPTODEVS_DAO_ABI,
-  CRYPTODEVS_NFT_ABI,
+  CHEK_DAO_CONTRACT_ADDRESS,
+  CHEK_NFT_CONTRACT_ADDRESS,
+  CHEK_DAO_ABI,
+  CHEK_NFT_ABI,
 } from "../constants";
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
   const [nftBalance, setNftBalance] = useState(0);
   const [proposals, setProposals] = useState([]);
   const [numProposals, setNumProposals] = useState("0");
-  const [fakeNftTokenId, setFakeNftTokenId] = useState("");
+  const [proposalLabel, setProposalLabel] = useState("");
   const [selectedTab, setSelectedTab] = useState("");
   const [loading, setLoading] = useState(false);
   const [walletConnected, setWalletConnected] = useState(false);
@@ -34,9 +34,7 @@ export default function Home() {
   const getDAOTreasuryBalance = async () => {
     try {
       const provider = await getProviderOrSigner();
-      const balance = await provider.getBalance(
-        CRYPTODEVS_DAO_CONTRACT_ADDRESS
-      );
+      const balance = await provider.getBalance(CHEK_DAO_CONTRACT_ADDRESS);
       setTreasuryBalance(balance.toString());
     } catch (error) {
       console.error(error);
@@ -69,7 +67,7 @@ export default function Home() {
     try {
       const signer = await getProviderOrSigner(true);
       const daoContract = getDaoContractInstance(signer);
-      const tx = await daoContract.createProposal(fakeNftTokenId);
+      const tx = await daoContract.createProposal(proposalLabel);
       setLoading(true);
       await tx.wait();
       await getNumProposalsInDAO();
@@ -163,16 +161,16 @@ export default function Home() {
 
   const getDaoContractInstance = (providerOrSigner) => {
     return new Contract(
-      CRYPTODEVS_DAO_CONTRACT_ADDRESS,
-      CRYPTODEVS_DAO_ABI,
+      CHEK_DAO_CONTRACT_ADDRESS,
+      CHEK_DAO_ABI,
       providerOrSigner
     );
   };
 
   const getCryptodevsNFTContractInstance = (providerOrSigner) => {
     return new Contract(
-      CRYPTODEVS_NFT_CONTRACT_ADDRESS,
-      CRYPTODEVS_NFT_ABI,
+      CHEK_NFT_CONTRACT_ADDRESS,
+      CHEK_NFT_ABI,
       providerOrSigner
     );
   };
@@ -225,11 +223,11 @@ export default function Home() {
     } else {
       return (
         <div className={styles.container}>
-          <label>Fake NFT token ID to purchase: </label>
+          <label>Proposal you want to pass: </label>
           <input
             placeholder="0"
             type="number"
-            onChange={(e) => setFakeNftTokenId(e.target.value)}
+            onChange={(e) => setProposalLabel(e.target.value)}
           />
           <button className={styles.button2} onClick={createProposal}>
             Create
@@ -256,7 +254,7 @@ export default function Home() {
           {proposals.map((p, index) => (
             <div key={index} className={styles.proposalCard}>
               <p>Proposal ID: {p.proposalId}</p>
-              <p>Fake NFT to purchase: {p.nftTokenId}</p>
+              <p>Proposal Label : {p.nftTokenId}</p>
               <p>Deadline: {p.deadline.toLocaleString()}</p>
               <p>Yay Votes: {p.yayVotes}</p>
               <p>Nay Votes: {p.nayVotes}</p>
