@@ -268,7 +268,7 @@ export default function Home() {
                     Vote YAY
                   </button>
                   <button
-                    className={styles.description}
+                    className={styles.button2}
                     onClick={() => voteOnProposal(p.proposalId, "NAY")}
                   >
                     Vote NAY
