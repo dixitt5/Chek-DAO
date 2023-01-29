@@ -297,17 +297,29 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>CryptoFunk DAO</title>
+        <title>Chek DAO</title>
         <meta name="description" content="CryptoFunk DAO" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <div className={styles.main}>
         <div>
-          <h1 className={styles.title}>Welcome to Crypto Funks!</h1>
-          <div className={styles.description}>Welcome to the DAO!</div>
+          <h1 className={styles.title}>Welcome to ChekDAO!</h1>
           <div className={styles.description}>
-            Your Crypto Funks NFT Balance: {nftBalance} <br />
+            Solution for Developer Problems.
+          </div>
+          <div className={styles.description}>
+            Your NFT Balance: {nftBalance} <br />
+            <p>
+              If you don't have one, get one here:
+              <a
+                className={styles.link}
+                href="https://nft-collection-dixitt5.vercel.app/"
+              >
+                Get NFT
+              </a>
+            </p>
+            <br></br>
             Treasury Balance: {formatEther(treasuryBalance)} ETH <br />
             Total Number of Proposals: {numProposals}
           </div>
